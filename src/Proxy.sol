@@ -1,8 +1,16 @@
 //SPDX-License-identifier:MIT
 pragma solidity ^0.8.13;
 
+import {Test, console} from "forge-std/Test.sol";
+
+/**
+ * @title Barebones Proxy Recreation
+ * @author Mahendran Anbarasan
+ * @notice 
+ */
 abstract contract Proxy {
     function _delegate(address implementation) internal virtual {
+        console.log("Proxy Delegate:",implementation);
         assembly {
             calldatacopy(0, 0, calldatasize())
             let result := delegatecall(gas(), implementation, 0, calldatasize(), 0, 0)

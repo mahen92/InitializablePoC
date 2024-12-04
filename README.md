@@ -1,3 +1,8 @@
+The project illustrates how the Transparent Upgradeable proxy works. Only the most essential code that are required for the proxy pattern are used to illustrate the working mechanism in a simple manner.
+
+
+
+
 ## Foundry
 
 **Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
