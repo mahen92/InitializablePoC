@@ -4,6 +4,12 @@ import "./Initializable.sol";
 import {ERC1967Utils} from "../TransparentUpgradeableProxy/ERC1967Utils.sol";
 import "./IERC1822Proxiable.sol";
 
+/**
+ * @title UUPS Demonstration
+ * @author Mahendran Anbarasan
+ * @notice
+ */
+
 abstract contract UUPSUpgradeable is Inititalizable {
     address private immutable __self = address(this);
     string public constant UPGRADE_INTERFACE_VERSION = "5.0.0";
