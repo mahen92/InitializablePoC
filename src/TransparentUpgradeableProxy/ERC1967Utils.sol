@@ -4,13 +4,13 @@ pragma solidity ^0.8.13;
 /**
  * @title Barebones ERC1967 Recreation
  * @author Mahendran Anbarasan
- * @notice 
+ * @notice
  */
 library ERC1967Utils {
     error NonPayableCheck();
     error DelegateFailed();
 
-    bytes32 private constant IMPLEMENTATION_SLOT = 0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc;
+    bytes32 public constant IMPLEMENTATION_SLOT = 0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc;
 
     struct AddressSlot {
         address value;

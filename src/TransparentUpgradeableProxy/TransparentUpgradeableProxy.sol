@@ -6,7 +6,7 @@ import {Test, console} from "forge-std/Test.sol";
 /**
  * @title Barebones TransparentUpgradeableProxy recreation
  * @author Mahendran Anbarasan
- * @notice 
+ * @notice
  */
 interface ITransparentUpgradeableProxy {
     /// @dev See {UUPSUpgradeable-upgradeToAndCall}
@@ -28,7 +28,7 @@ contract TransparentUpgradeableProxy is ERC1967Proxy {
     }
 
     function _fallback() internal virtual override {
-        console.log("TUP _fallback()",msg.sender);
+        console.log("TUP _fallback()", msg.sender);
         if (msg.sender == _proxyAdmin()) {
             if (msg.sig != ITransparentUpgradeableProxy.upgradeToAndCall.selector) {
                 revert ProxyDeniedAdminAccess();
@@ -46,7 +46,7 @@ contract TransparentUpgradeableProxy is ERC1967Proxy {
         ERC1967Utils.upgradeToAndCall(newImplementation, data);
     }
 
-    function impl() public view returns(address){
+    function impl() public view returns (address) {
         return _implementation();
     }
 }

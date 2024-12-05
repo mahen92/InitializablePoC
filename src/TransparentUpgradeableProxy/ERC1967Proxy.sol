@@ -6,8 +6,9 @@ import {ERC1967Utils} from "./ERC1967Utils.sol";
 /**
  * @title ERC1967 Barebones recreation
  * @author Mahendran Anbarasan
- * @notice 
+ * @notice
  */
+
 abstract contract ERC1967Proxy is Proxy {
     constructor(address implementation, bytes memory _data) payable {
         ERC1967Utils.upgradeToAndCall(implementation, _data);

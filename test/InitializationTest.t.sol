@@ -2,23 +2,23 @@
 pragma solidity ^0.8.13;
 
 import {Test, console} from "forge-std/Test.sol";
-import "../src/ProxyAdmin.sol";
-import "../src/TransparentUpgradeableProxy.sol";
-import {ITransparentUpgradeableProxy} from"../src/TransparentUpgradeableProxy.sol";
-import {ERC1967Proxy} from "../src/ERC1967Proxy.sol";
+import "../src/TransparentUpgradeableProxy/ProxyAdmin.sol";
+import "../src/TransparentUpgradeableProxy/TransparentUpgradeableProxy.sol";
+import {ITransparentUpgradeableProxy} from "../src/TransparentUpgradeableProxy/TransparentUpgradeableProxy.sol";
+import {ERC1967Proxy} from "../src/TransparentUpgradeableProxy/ERC1967Proxy.sol";
 import "./mocks/MockToken.sol";
 import "./mocks/MockTokenV1.sol";
-import "../src/OurProxy.sol";
+import "../src/TransparentUpgradeableProxy/OurProxy.sol";
 
 /**
  * @title Testing barebones Upgradeable Implementation
  * @author Mahendran Anbarasan
- * @notice 
+ * @notice
  */
 contract InititializationTest is Test {
-    
     ProxyAdmin pAdmin;
     OurProxy tProxy;
+
     address owner = makeAddr("owner");
     address alice = makeAddr("alice");
     MockToken mt = new MockToken();
@@ -39,9 +39,10 @@ contract InititializationTest is Test {
         vm.startPrank(alice);
         address(tProxy).call(abi.encodeWithSignature("mint(uint256)", 10));
         vm.stopPrank();
-        (bool success, bytes memory result) = address(tProxy).staticcall(abi.encodeWithSignature("balanceOf(address)", alice));
-         uint256 balance = abi.decode(result, (uint256));
-         assertEq(balance,10);
+        (bool success, bytes memory result) =
+            address(tProxy).staticcall(abi.encodeWithSignature("balanceOf(address)", alice));
+        uint256 balance = abi.decode(result, (uint256));
+        assertEq(balance, 10);
     }
 
     /**
@@ -49,9 +50,9 @@ contract InititializationTest is Test {
      */
     function test_upgrade() public {
         vm.startPrank(owner);
-        pAdmin.upgradeAndCall(ITransparentUpgradeableProxy(tProxy),address(mt1),"");
+        pAdmin.upgradeAndCall(ITransparentUpgradeableProxy(tProxy), address(mt1), "");
         vm.stopPrank();
-        assertEq(address(mt1),tProxy.impl());
+        assertEq(address(mt1), tProxy.impl());
     }
 
     /**
@@ -59,15 +60,15 @@ contract InititializationTest is Test {
      */
     function test_upgradeAndMint() public {
         vm.startPrank(owner);
-        pAdmin.upgradeAndCall(ITransparentUpgradeableProxy(tProxy),address(mt1),"");
+        pAdmin.upgradeAndCall(ITransparentUpgradeableProxy(tProxy), address(mt1), "");
         vm.stopPrank();
 
         vm.startPrank(alice);
         address(tProxy).call(abi.encodeWithSignature("mint(uint256)", 10));
         vm.stopPrank();
-        (bool success, bytes memory result) = address(tProxy).staticcall(abi.encodeWithSignature("balanceOf(address)", alice));
-         uint256 balance = abi.decode(result, (uint256));
-         assertEq(balance,20);
-
+        (bool success, bytes memory result) =
+            address(tProxy).staticcall(abi.encodeWithSignature("balanceOf(address)", alice));
+        uint256 balance = abi.decode(result, (uint256));
+        assertEq(balance, 20);
     }
 }
