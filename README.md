@@ -1,4 +1,4 @@
-The project illustrates how the Transparent Upgradeable proxy works. Only the most essential code that are required for the proxy pattern are used to illustrate the working mechanism in a simple manner.
+The project illustrates how the Transparent Upgradeable proxy and UUPS work. Only the most essential code that are required for the patterns are used to illustrate the working mechanism in a simple manner.
 
 
 
