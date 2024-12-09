@@ -10,7 +10,7 @@ import "./IERC1822Proxiable.sol";
  * @notice
  */
 
-abstract contract UUPSUpgradeable is Inititalizable {
+abstract contract UUPSUpgradeable is Initializable {
     address private immutable __self = address(this);
     string public constant UPGRADE_INTERFACE_VERSION = "5.0.0";
 

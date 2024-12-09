@@ -6,7 +6,7 @@ pragma solidity ^0.8.13;
  * @notice
  */
 
-abstract contract Inititalizable {
+abstract contract Initializable {
     struct InitializableStorage {
         uint64 _initialized;
         bool _initializing;
